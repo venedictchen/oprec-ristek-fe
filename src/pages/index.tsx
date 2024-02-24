@@ -1,12 +1,10 @@
 import HomePage from "./HomePage";
 import { Poppins } from "next/font/google";
 import { SiMoneygram } from "react-icons/si";
-import IncomePage from "./IncomePage";
-import { useState } from "react";
+import TransactionPage from "./TransactionPage";
 import { SideBar } from "@/components/elements/SideBar";
-import ExpensePage from "./ExpensePage";
 import GoalsPage from "./GoalsPage";
-import { SidebarProvider, useSidebarContext } from "@/components/contexts";
+import { useSidebarContext } from "@/components/contexts";
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -33,8 +31,7 @@ export default function Home() {
       <div className="flex flex-1 ">
         <SideBar selectedOption={selectedOption} onSidebarClick={setOption} />
         {selectedOption === "dashboard" && <HomePage />}
-        {selectedOption === "income" && <IncomePage />}
-        {selectedOption === "expense" && <ExpensePage />}
+        {selectedOption === "transactions" && <TransactionPage />}
         {selectedOption === "goals" && <GoalsPage />}
       </div>
     </main>
