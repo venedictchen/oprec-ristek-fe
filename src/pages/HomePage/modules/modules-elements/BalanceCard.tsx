@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 const BalanceCard: React.FC = () => {
-    const totalBalance = 2005500;
+    const totalBalance = 20000000;
     const [animatedBalance, setAnimatedBalance] = useState<number>(0);
 
     const formatBalance = (balance:number) => {
