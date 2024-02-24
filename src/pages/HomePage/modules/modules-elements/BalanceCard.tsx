@@ -1,18 +1,15 @@
 import React, { useEffect, useState } from 'react';
 
 const BalanceCard: React.FC = () => {
-    const totalBalance = 23629;
+    const totalBalance = 2005500;
     const [animatedBalance, setAnimatedBalance] = useState<number>(0);
 
-    const formatBalance = (balance: number) => {
-        const formattedValue = new Intl.NumberFormat('en-ID', {
-            style: 'currency',
-            currency: 'IDR',
-        }).format(balance);
-
+    const formatBalance = (balance:number) => {
+        const formattedValue = balance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");    
+    
         return formattedValue;
     };
-
+    
     const formattedBalance = formatBalance(animatedBalance);
 
     useEffect(() => {
