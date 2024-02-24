@@ -18,8 +18,8 @@ export default function Home() {
   const { selectedOption, setOption } = useSidebarContext();
   console.log(selectedOption);
   return (
-    <main className={`flex min-h-screen flex-col justify-between bg-[#252525] ${poppins.className}`}>
-      <div className="flex flex-col bg-gray-100">
+    <main className={`flex min-h-screen flex-col justify-between bg-[#F5F5F5] ${poppins.className}`}>
+      <div className="flex flex-col bg-[#A1A0BD]">
         <div className="flex items-center justify-between p-4 bg-[#4C49ED] shadow-md">
           <div className="flex items-center space-x-2 text-[#FFFFFF]">
             <SiMoneygram className="text-3xl" />
