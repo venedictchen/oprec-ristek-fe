@@ -8,7 +8,6 @@ const HomePage: React.FC = () => {
                 <BalanceCard/>
             </div>
             <div className="col-span-1">
-                {/* Content for the second column */}
             </div>
             </div>
         </div>

@@ -15,16 +15,16 @@ export const SideBar: React.FC<SideBarProps> = ({ selectedOption, onSidebarClick
     <nav className="flex flex-col w-64 p-4 bg-white border-r border-gray-200 cursor-pointer font-semibold">
       <div className="flex flex-col py-12 text-[#A1A0BD] gap-16 text-center">
         {sidebarOptions.map((option) => (
-          <div
-            key={option.option}
-            className={`flex px-10 py-2 text-[#A1A0BD] hover:bg-[#A1A0BD] hover:text-[#4C49ED] rounded-md font-semibold ${
-              selectedOption === option.option ? "bg-[#A1A0BD] text-[#4C49ED]" : ""
-            }`}
-            onClick={() => onSidebarClick(option.option)}
-          >
-            {option.icon}
-            <p className="mx-2 my-1">{option.label}</p>
-          </div>
+         <div
+         key={option.option}
+         className={`flex px-10 py-2 rounded-md font-semibold ${
+           selectedOption === option.option ? "bg-[#A1A0BD] text-[#4C49ED]" : "hover:bg-[#A1A0BD] hover:text-[#4C49ED]"
+         }`}
+         onClick={() => onSidebarClick(option.option)}
+       >
+         {option.icon}
+         <p className="mx-2 my-1">{option.label}</p>
+       </div>
         ))}
       </div>
       <div className="flex px-10 py-2 mt-14 text-[#A1A0BD] hover:text-[#FFFFFF] hover:bg-[#E60000] rounded-md font-semibold">

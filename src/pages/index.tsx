@@ -6,6 +6,7 @@ import { useState } from "react";
 import { SideBar } from "@/components/elements/SideBar";
 import ExpensePage from "./ExpensePage";
 import GoalsPage from "./GoalsPage";
+import { SidebarProvider, useSidebarContext } from "@/components/contexts";
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -14,15 +15,10 @@ const poppins = Poppins({
 });
 
 export default function Home() {
-  const [selectedOption, setSelectedOption] = useState("dashboard");
-
-  const handleSidebarClick = (option: string) => {
-    console.log(option);
-    setSelectedOption(option);
-  };
-
+  const { selectedOption, setOption } = useSidebarContext();
+  console.log(selectedOption);
   return (
-    <main className={`flex min-h-screen flex-col justify-between bg-[#F5F5F5] ${poppins.className}`}>
+    <main className={`flex min-h-screen flex-col justify-between bg-[#252525] ${poppins.className}`}>
       <div className="flex flex-col bg-gray-100">
         <div className="flex items-center justify-between p-4 bg-[#4C49ED] shadow-md">
           <div className="flex items-center space-x-2 text-[#FFFFFF]">
@@ -34,13 +30,14 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="flex flex-1">
-        <SideBar selectedOption={selectedOption} onSidebarClick={handleSidebarClick} />
+      <div className="flex flex-1 ">
+        <SideBar selectedOption={selectedOption} onSidebarClick={setOption} />
         {selectedOption === "dashboard" && <HomePage />}
         {selectedOption === "income" && <IncomePage />}
         {selectedOption === "expense" && <ExpensePage />}
         {selectedOption === "goals" && <GoalsPage />}
       </div>
     </main>
+    
   );
 }
