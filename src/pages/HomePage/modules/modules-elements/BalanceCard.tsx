@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 const BalanceCard: React.FC = () => {
-    const totalBalance = 23678988992929;
+    const totalBalance = 23629;
+    const [animatedBalance, setAnimatedBalance] = useState<number>(0);
 
     const formatBalance = (balance: number) => {
         const formattedValue = new Intl.NumberFormat('en-ID', {
@@ -12,8 +13,26 @@ const BalanceCard: React.FC = () => {
         return formattedValue;
     };
 
-    const formattedBalance = formatBalance(totalBalance);
-    
+    const formattedBalance = formatBalance(animatedBalance);
+
+    useEffect(() => {
+        const animationDuration = 2000;
+        const startTime = Date.now();
+
+        const updateBalance = () => {
+            const currentTime = Date.now();
+            const progress = Math.min(1, (currentTime - startTime) / animationDuration);
+            const newAnimatedBalance = Math.floor(progress * totalBalance);
+
+            setAnimatedBalance(newAnimatedBalance);
+
+            if (progress < 1) {
+                requestAnimationFrame(updateBalance);
+            }
+        };
+
+        updateBalance();
+    }, [totalBalance]);
 
     return (
         <div className="flex bg-[#FFFFFF] w-max rounded-2xl shadow-lg">
