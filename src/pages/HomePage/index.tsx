@@ -7,7 +7,7 @@ const HomePage: React.FC = () => {
     return (
         <div className="flex w-full py-12 justify-center">
            <div className="flex flex-col">
-                <div className="flex flex-row gap-10 mb-24">
+                <div className="flex flex-row gap-12 mb-24">
                 <BalanceCard/>
                 <BalanceCard/>
 
