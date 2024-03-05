@@ -68,9 +68,6 @@ const BalanceCard: React.FC <BalanceCardProps>= ({
                     <button onClick={handleSeeMore} className="bg-[#4C49ED] px-6 py-2 font-semibold  text-[#FFFFFF] rounded-2xl ">
                         See More
                     </button>
-                    {/* <button className="px-6 py-2 font-semibold text-[#4C49ED] rounded-2xl border border-[#4C49ED]">
-                        Expense
-                    </button> */}
                 </div>
             </div>
             <div

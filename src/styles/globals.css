@@ -28,3 +28,7 @@
 .card-container.paused {
     animation-play-state: paused;
 }
+
+.backdrop-filter {
+    backdrop-filter: blur(8px);
+  }

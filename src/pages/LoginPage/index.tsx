@@ -38,13 +38,13 @@ const LoginPage: React.FC = () => {
                     </label>
                     {isLoading ? (
                         <div className="flex justify-center items-center">
-                            <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-blue-500 border-t-blue-500"></div>
+                            <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-[#4C49ED] border-t-[#4C49ED]"></div>
                         </div>
                     ) : (
                         <button
                             type="button"
                             onClick={handleLogin}
-                            className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none"
+                            className="bg-[#4C49ED] text-white px-4 py-2 rounded-md hover:bg-[#4C49ED] focus:outline-none"
                         >
                             Login
                         </button>
