@@ -20,3 +20,11 @@
 .card-container {
     animation: wavy 2s infinite;
 }
+
+.card-container {
+    animation: wavy 2s infinite;
+}
+
+.card-container.paused {
+    animation-play-state: paused;
+}

@@ -9,12 +9,12 @@ const HomePage: React.FC = () => {
            <div className="flex flex-col">
                 <div className="flex flex-row gap-12 mb-24">
                 <BalanceCard/>
-                <BalanceCard/>
+
 
                 </div>
                 <div className="flex flex-row gap-24">
                 <IncomeCard/>
-                <SavesCard/>
+                {/* <SavesCard/> */}
                 <ExpenseCard/>
                 
                 

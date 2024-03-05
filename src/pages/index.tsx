@@ -4,7 +4,9 @@ import { SiMoneygram } from "react-icons/si";
 import TransactionPage from "./TransactionPage";
 import { SideBar } from "@/components/elements/SideBar";
 import GoalsPage from "./GoalsPage";
-import { useSidebarContext } from "@/components/contexts";
+import { useAuth, useSidebarContext } from "@/components/contexts";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -13,10 +15,20 @@ const poppins = Poppins({
 });
 
 export default function Home() {
+  
+  const router = useRouter();
   const { selectedOption, setOption } = useSidebarContext();
-  console.log(selectedOption);
+  const { isLoading, isAuthenticated,user } = useAuth();
+  
+  useEffect(() => {
+    if (isLoading && !isAuthenticated) {
+      router.replace('/LoginPage');
+    }
+  }, [isLoading, isAuthenticated]);
+
   return (
-    <main className={`flex min-h-screen flex-col justify-between bg-[#F5F5F5] ${poppins.className}`}>
+    isAuthenticated && (
+      <main className={`flex min-h-screen flex-col justify-between bg-[#F5F5F5] ${poppins.className}`}>
       <div className="flex flex-col bg-[#A1A0BD]">
         <div className="flex items-center justify-between p-4 bg-[#4C49ED] shadow-md">
           <div className="flex items-center space-x-2 text-[#FFFFFF]">
@@ -24,7 +36,7 @@ export default function Home() {
             <h1 className="text-xl font-bold text-[#FFFFFF]">CuanTracker</h1>
           </div>
           <div className="flex items-center space-x-4">
-            <span className="text-sm text-white">Welcome, User</span>
+            <span className="text-sm text-white">Welcome, {user.username}</span>
           </div>
         </div>
       </div>
@@ -35,6 +47,6 @@ export default function Home() {
         {selectedOption === "goals" && <GoalsPage />}
       </div>
     </main>
-    
+    )
   );
 }

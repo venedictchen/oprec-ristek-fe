@@ -4,6 +4,8 @@ const BalanceCard: React.FC = () => {
     const totalBalance = 20000000;
     const [animatedBalance, setAnimatedBalance] = useState<number>(0);
 
+    const [isHovered, setIsHovered] = useState(false);
+
     const formatBalance = (balance:number) => {
         const formattedValue = balance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");    
     
@@ -32,7 +34,13 @@ const BalanceCard: React.FC = () => {
     }, [totalBalance]);
 
     return (
-        <div className="flex bg-[#FFFFFF] w-max rounded-2xl shadow-lg card-container">
+        <div
+            className={`flex bg-[#FFFFFF] w-max rounded-2xl shadow-lg card-container ${isHovered ? 'paused' : ''}`}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+            onTouchStart={() => setIsHovered(true)}
+            onTouchEnd={() => setIsHovered(false)}
+        >
             <div className="flex flex-col p-6 mt-4 mb-4">
                 <span className="text-[#000000] text-xl font-bold">Total Balance</span>
                 <div className="flex items-center mt-2">
@@ -44,9 +52,11 @@ const BalanceCard: React.FC = () => {
                 <span className="text-[#A1A0BD] font-semibold mb-4">Last Transaction</span>
                 <div className="flex gap-2">
                     <button className="bg-[#4C49ED] px-6 py-2 font-semibold  text-[#FFFFFF] rounded-2xl ">
-                        See More
+                        Income
                     </button>
-         
+                    <button className="px-6 py-2 font-semibold text-[#4C49ED] rounded-2xl border border-[#4C49ED]">
+                        Expense
+                    </button>
                 </div>
             </div>
             <div
