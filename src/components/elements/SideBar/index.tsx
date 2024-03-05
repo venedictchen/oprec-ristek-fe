@@ -4,10 +4,16 @@ import { GrTransaction } from "react-icons/gr";
 import { BiLogOut } from "react-icons/bi";
 import { SideBarProps } from "./interface";
 import { useAuth } from "@/components/contexts";
+import { useState } from "react";
 export const SideBar: React.FC<SideBarProps> = ({ selectedOption, onSidebarClick }) => {
   const { logout } = useAuth();
+  const [showLogoutToast, setShowLogoutToast] = useState(false);
   const handleLogout = async () => {
-    await logout()
+    await logout();
+    setShowLogoutToast(true);
+    setTimeout(() => {
+      setShowLogoutToast(false);
+    }, 3000);
   }
   const sidebarOptions = [
     { icon: <MdSpaceDashboard className="w-8 h-8" />, label: "Dashboard", option: "dashboard" },
@@ -17,6 +23,12 @@ export const SideBar: React.FC<SideBarProps> = ({ selectedOption, onSidebarClick
 
   return (
     <nav className="flex flex-col w-64 p-4 bg-white border-r border-gray-200 cursor-pointer font-semibold">
+      {showLogoutToast && (
+        <div className="fixed bottom-5 right-5 bg-green-500 text-white p-2 rounded-md">
+          Logout successful
+        </div>
+      )}
+
       <div className="flex flex-col py-12 text-[#A1A0BD] gap-24 text-center">
         {sidebarOptions.map((option) => (
           <div
