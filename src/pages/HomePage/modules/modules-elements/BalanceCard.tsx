@@ -2,17 +2,17 @@ import { useAuth, useSidebarContext } from '@/components/contexts';
 import React, { useEffect, useState } from 'react';
 import { BalanceCardProps } from '../interface';
 
-const BalanceCard: React.FC <BalanceCardProps>= ({
+const BalanceCard: React.FC<BalanceCardProps> = ({
     totalBalance,
     lastTransactionType,
     lastTransactionAmount,
 }) => {
 
     const [animatedBalance, setAnimatedBalance] = useState<number>(0);
-  
+
     const [isHovered, setIsHovered] = useState(false);
 
-    const {setOption} = useSidebarContext();
+    const { setOption } = useSidebarContext();
 
     const formatBalance = (balance: number) => {
         const formattedValue = balance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
@@ -56,10 +56,10 @@ const BalanceCard: React.FC <BalanceCardProps>= ({
             <div className="flex flex-col p-6 mt-4 mb-4">
                 <span className="text-[#000000] text-xl font-bold">Total Balance</span>
                 <div className="flex items-center mt-2">
-                    <span className={`text-${lastTransactionType === 'income' ? '[#4FD18B]' : '[#E60000]'} text-2xl font-bold mr-1`}>
+                    <span className="text-xl font-bold mr-1" style={{ color: lastTransactionType === 'income' ? '#4FD18B' : '#E60000' }}>
                         {lastTransactionType === 'income' ? '+' : '-'}
                     </span>
-                    <span className={`text-${lastTransactionType === 'income' ? '[#4FD18B]' : '[#E60000]'} text-xl w-40 overflow-clip`}>
+                    <span className="text-xl w-40 overflow-clip" style={{ color: lastTransactionType === 'income' ? '#4FD18B' : '#E60000' }}>
                         {lastTransactionAmount}
                     </span>
                 </div>

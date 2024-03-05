@@ -235,6 +235,7 @@ const TransactionPage: React.FC = () => {
       {showModal && (
         <ModalInput isOpen={showModal} onClose={handleCloseModal} />
       )}
+      
     </div>
   );
 };

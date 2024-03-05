@@ -45,7 +45,7 @@ export default function Home() {
         <SideBar selectedOption={selectedOption} onSidebarClick={setOption} />
         {selectedOption === "dashboard" && <HomePage />}
         {selectedOption === "transactions" && <TransactionPage />}
-        {selectedOption === "goals" && <GoalsPage />}
+        {/* {selectedOption === "goals" && <GoalsPage />} */}
       </div>
     </main>
     )
