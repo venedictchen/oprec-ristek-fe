@@ -3,7 +3,6 @@ import { Poppins } from "next/font/google";
 import { SiMoneygram } from "react-icons/si";
 import TransactionPage from "./TransactionPage";
 import { SideBar } from "@/components/elements/SideBar";
-import GoalsPage from "./GoalsPage";
 import { useAuth, useSidebarContext } from "@/components/contexts";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
@@ -45,7 +44,6 @@ export default function Home() {
         <SideBar selectedOption={selectedOption} onSidebarClick={setOption} />
         {selectedOption === "dashboard" && <HomePage />}
         {selectedOption === "transactions" && <TransactionPage />}
-        {/* {selectedOption === "goals" && <GoalsPage />} */}
       </div>
     </main>
     )
