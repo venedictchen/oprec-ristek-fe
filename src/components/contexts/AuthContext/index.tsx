@@ -18,9 +18,14 @@ export const useAuth = () => useContext(AuthContext);
 export const AuthContextProvider: React.FC<AuthContextProviderProps> = ({ children }) => {
     const router = useRouter();
     const [user, setUser] = useState<UserProps>({
-        id: '',
+        user_id: 0,
         username: '',
         email: '',
+        balance: 0,
+        income: 0,
+        expenses:0,
+        last_transaction_amount:0,
+        last_transaction_type:'',
     });
     const [loading, setLoading] = useState(false);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -38,6 +43,8 @@ export const AuthContextProvider: React.FC<AuthContextProviderProps> = ({ childr
                 const userData = response.data as UserProps;
                 setUser(userData);
                 setIsAuthenticated(true);
+                console.log(userData)
+                router.replace('/');
             } else {
                 console.error('Authentication failed');
             }
@@ -57,9 +64,14 @@ export const AuthContextProvider: React.FC<AuthContextProviderProps> = ({ childr
             );
             if (response.status === 200) {
                 setUser({
-                    id: '',
+                    user_id: 0,
                     username: '',
                     email: '',
+                    balance: 0,
+                    income: 0,
+                    expenses:0,
+                    last_transaction_amount:0,
+                    last_transaction_type:'',
                 });
                 setIsAuthenticated(false);
                 router.replace('/LoginPage');

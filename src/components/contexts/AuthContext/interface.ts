@@ -1,7 +1,12 @@
 export interface UserProps{
-    id: string;
+    user_id: number;
     username: string;
     email: string;
+    balance: number;
+    income: number;
+    expenses: number;
+    last_transaction_amount: number;
+    last_transaction_type: string;
 }
 
 export interface AuthContextProps{

@@ -19,9 +19,10 @@ export default function Home() {
   const router = useRouter();
   const { selectedOption, setOption } = useSidebarContext();
   const { isLoading, isAuthenticated,user } = useAuth();
-  
+  console.log(user);
+  console.log(isLoading);
   useEffect(() => {
-    if (isLoading && !isAuthenticated) {
+    if (!isLoading && !isAuthenticated) {
       router.replace('/LoginPage');
     }
   }, [isLoading, isAuthenticated]);

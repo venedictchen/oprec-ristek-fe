@@ -7,23 +7,11 @@ const LoginPage: React.FC = () => {
     const { login, isLoading, isAuthenticated } = useAuth();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [loadingMessage, setLoadingMessage] = useState('');
 
     const handleLogin = async () => {
-        setLoadingMessage('Logging in...');
         await login(username, password);
     };
 
-    useEffect(() => {
-        if (isAuthenticated) {
-            setLoadingMessage('Redirecting...');
-            setTimeout(() => {
-                router.replace('/');
-            }, 1000); // Change the delay time as needed
-        } else {
-            setLoadingMessage('');
-        }
-    }, [isAuthenticated, router]);
 
     return (
         <div className="flex items-center justify-center h-screen">
@@ -51,7 +39,6 @@ const LoginPage: React.FC = () => {
                     {isLoading ? (
                         <div className="flex justify-center items-center">
                             <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-blue-500 border-t-blue-500"></div>
-                            <span className="ml-2">{loadingMessage}</span>
                         </div>
                     ) : (
                         <button

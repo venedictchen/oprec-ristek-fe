@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { ExpenseCardProps } from '../interface';
 
-const ExpenseCard: React.FC = () => {
-    const totalExpense = 30000;
+const ExpenseCard: React.FC <ExpenseCardProps> = ({
+    expense
+}) => {
+    const totalExpense = expense;
     const [animatedExpense, setAnimatedExpense] = useState<number>(0);
 
     const formatExpense = (balance:number) => {

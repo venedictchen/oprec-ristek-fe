@@ -10,10 +10,8 @@ export const SideBar: React.FC<SideBarProps> = ({ selectedOption, onSidebarClick
   const [showLogoutToast, setShowLogoutToast] = useState(false);
   const handleLogout = async () => {
     await logout();
-    setShowLogoutToast(true);
-    setTimeout(() => {
-      setShowLogoutToast(false);
-    }, 3000);
+    onSidebarClick("dashboard");
+
   }
   const sidebarOptions = [
     { icon: <MdSpaceDashboard className="w-8 h-8" />, label: "Dashboard", option: "dashboard" },

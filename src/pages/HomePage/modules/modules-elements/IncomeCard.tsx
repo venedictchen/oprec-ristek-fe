@@ -1,7 +1,11 @@
+import { useAuth } from '@/components/contexts';
 import React, { useEffect, useState } from 'react';
+import { IncomeCardProps } from '../interface';
 
-const IncomeCard: React.FC = () => {
-    const totalIncome = 200000;
+const IncomeCard: React.FC <IncomeCardProps>  = ({
+    income
+}) => {
+    const totalIncome = income;
     const [animatedIncome, setAnimatedIncome] = useState<number>(0);
 
     const formatIncome = (balance:number) => {

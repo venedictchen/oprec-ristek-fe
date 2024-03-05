@@ -1,18 +1,30 @@
+import { useAuth, useSidebarContext } from '@/components/contexts';
 import React, { useEffect, useState } from 'react';
+import { BalanceCardProps } from '../interface';
 
-const BalanceCard: React.FC = () => {
-    const totalBalance = 20000000;
+const BalanceCard: React.FC <BalanceCardProps>= ({
+    totalBalance,
+    lastTransactionType,
+    lastTransactionAmount,
+}) => {
+
     const [animatedBalance, setAnimatedBalance] = useState<number>(0);
-
+  
     const [isHovered, setIsHovered] = useState(false);
 
-    const formatBalance = (balance:number) => {
-        const formattedValue = balance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");    
-    
+    const {setOption} = useSidebarContext();
+
+    const formatBalance = (balance: number) => {
+        const formattedValue = balance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+
         return formattedValue;
     };
-    
+
     const formattedBalance = formatBalance(animatedBalance);
+
+    const handleSeeMore = () => {
+        setOption("transactions");
+    }
 
     useEffect(() => {
         const animationDuration = 2000;
@@ -44,19 +56,21 @@ const BalanceCard: React.FC = () => {
             <div className="flex flex-col p-6 mt-4 mb-4">
                 <span className="text-[#000000] text-xl font-bold">Total Balance</span>
                 <div className="flex items-center mt-2">
-                    <span className="text-[#4FD18B] text-2xl font-bold mr-1">+</span>
-                    <span className="text-[#4FD18B] text-xl w-40 overflow-clip">
-                    {formattedBalance}
+                    <span className={`text-${lastTransactionType === 'income' ? '[#4FD18B]' : '[#E60000]'} text-2xl font-bold mr-1`}>
+                        {lastTransactionType === 'income' ? '+' : '-'}
+                    </span>
+                    <span className={`text-${lastTransactionType === 'income' ? '[#4FD18B]' : '[#E60000]'} text-xl w-40 overflow-clip`}>
+                        {lastTransactionAmount}
                     </span>
                 </div>
                 <span className="text-[#A1A0BD] font-semibold mb-4">Last Transaction</span>
                 <div className="flex gap-2">
-                    <button className="bg-[#4C49ED] px-6 py-2 font-semibold  text-[#FFFFFF] rounded-2xl ">
-                        Income
+                    <button onClick={handleSeeMore} className="bg-[#4C49ED] px-6 py-2 font-semibold  text-[#FFFFFF] rounded-2xl ">
+                        See More
                     </button>
-                    <button className="px-6 py-2 font-semibold text-[#4C49ED] rounded-2xl border border-[#4C49ED]">
+                    {/* <button className="px-6 py-2 font-semibold text-[#4C49ED] rounded-2xl border border-[#4C49ED]">
                         Expense
-                    </button>
+                    </button> */}
                 </div>
             </div>
             <div
