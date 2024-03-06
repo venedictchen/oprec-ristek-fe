@@ -11,6 +11,7 @@ const TransactionPage: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [categoryFilter, setCategoryFilter] = useState<number | null>(null);
+  const [itemTypeFilter, setItemTypeFilter] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState<string>('');
 
   // Pagination
@@ -101,7 +102,8 @@ const TransactionPage: React.FC = () => {
   }, []);
   useEffect(() => {
     filterAndSearchData();
-  }, [userData, categoryFilter, searchTerm, currentPage]);
+    filterAndSearchDataType();
+  }, [userData, categoryFilter, searchTerm, currentPage,itemTypeFilter]);
 
   const filterAndSearchData = () => {
     let filteredTransactions = userData;
@@ -109,6 +111,26 @@ const TransactionPage: React.FC = () => {
     // Apply category filter if selected
     if (categoryFilter !== null) {
       filteredTransactions = filteredTransactions.filter(transaction => transaction.category === categoryFilter);
+    }
+
+    // Apply search filter if search term exists
+    if (searchTerm !== '') {
+      const lowerCaseSearchTerm = searchTerm.toLowerCase();
+      filteredTransactions = filteredTransactions.filter(transaction =>
+        transaction.title.toLowerCase().includes(lowerCaseSearchTerm) ||
+        transaction.description.toLowerCase().includes(lowerCaseSearchTerm)
+      );
+    }
+
+    setFilteredData(filteredTransactions);
+  };
+
+  const filterAndSearchDataType = () => {
+    let filteredTransactions = userData;
+
+    // Apply category filter if selected
+    if (itemTypeFilter !== null) {
+      filteredTransactions = filteredTransactions.filter(transaction => transaction.itemType === itemTypeFilter);
     }
 
     // Apply search filter if search term exists
@@ -132,6 +154,12 @@ const TransactionPage: React.FC = () => {
     setSearchTerm(term);
     setCurrentPage(1);
   };
+  const handleTransactionTypeFilterChange = (type: string | null) => {
+    setItemTypeFilter(type);
+    setCurrentPage(1);
+  };
+
+  console.log(filteredData.toReversed())
   return (
     <div className="container mx-auto p-8">
       {isModalOpen && (
@@ -157,6 +185,15 @@ const TransactionPage: React.FC = () => {
 
 
       </select>
+      <select
+        className="p-2 border rounded-lg mr-2 focus:outline-none focus:ring focus:border-[#4C49ED] hover:border-[#4C49ED]"
+        value={itemTypeFilter || ''}
+        onChange={(e) => handleTransactionTypeFilterChange(e.target.value ? e.target.value : null)}
+      >
+        <option value="">All ItemType</option>
+        <option value="income">Income</option>
+        <option value="expense">Expense</option>
+      </select>
 
       <input
         type="text"
@@ -178,7 +215,7 @@ const TransactionPage: React.FC = () => {
             </tr>
           </thead>
           <tbody>
-            {filteredData.slice(indexOfFirstTransaction, indexOfLastTransaction).map((transaction) => (
+            {filteredData.toReversed().slice(indexOfFirstTransaction, indexOfLastTransaction).map((transaction) => (
               <tr key={transaction.id} className="transition-all hover:bg-gray-50">
                 <td className="py-2 px-4 border">{transaction.title}</td>
                 <td className="py-2 px-4 border">{transaction.description}</td>
@@ -235,7 +272,7 @@ const TransactionPage: React.FC = () => {
       {showModal && (
         <ModalInput isOpen={showModal} onClose={handleCloseModal} />
       )}
-      
+
     </div>
   );
 };

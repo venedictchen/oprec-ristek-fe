@@ -17,7 +17,7 @@ const IncomeCard: React.FC <IncomeCardProps>  = ({
     const formattedIncome = formatIncome(animatedIncome);
 
     useEffect(() => {
-        const animationDuration = 2000;
+        const animationDuration = 800;
         const startTime = Date.now();
 
         const updateIncome = () => {

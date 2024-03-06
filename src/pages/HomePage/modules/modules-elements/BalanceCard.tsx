@@ -27,7 +27,7 @@ const BalanceCard: React.FC<BalanceCardProps> = ({
     }
 
     useEffect(() => {
-        const animationDuration = 2000;
+        const animationDuration = 800;
         const startTime = Date.now();
 
         const updateBalance = () => {
