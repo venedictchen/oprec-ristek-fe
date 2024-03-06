@@ -41,9 +41,10 @@ export default function Home() {
         </div>
       </div>
       <div className="flex flex-1 ">
-        <SideBar selectedOption={selectedOption} onSidebarClick={setOption} />
+        <TransactionPage />
+        {/* <SideBar selectedOption={selectedOption} onSidebarClick={setOption} />
         {selectedOption === "dashboard" && <HomePage />}
-        {selectedOption === "transactions" && <TransactionPage />}
+        {selectedOption === "transactions" && <TransactionPage />} */}
       </div>
     </main>
     )

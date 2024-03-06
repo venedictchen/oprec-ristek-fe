@@ -59,18 +59,18 @@ const ModalInput: React.FC<ModalInputProps> = ({ isOpen, onClose }) => {
     };
     return (
         isOpen && (
-            <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-8 rounded-lg shadow-md">
-                <h2 className="text-2xl font-semibold my-4">Create New Transaction</h2>
-                <button onClick={onClose} className="absolute top-2 right-2 text-gray-500 hover:text-gray-700">
-                    <MdOutlineCancel size={24} />
-                </button>
+            <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-4 md:p-8 rounded-lg shadow-md w-full max-w-md">
+        <h2 className="text-lg md:text-2xl font-semibold my-4">Create New Transaction</h2>
+        <button onClick={onClose} className="absolute top-2 right-2 text-gray-500 hover:text-gray-700">
+          <MdOutlineCancel size={24} />
+        </button>
 
-                <label className="block mb-2">Title:</label>
-                <input
-                    type="text"
-                    ref={titleRef}
-                    className="w-full border border-gray-300 p-2 rounded mb-4"
-                />
+        <label className="block mb-2">Title:</label>
+        <input
+          type="text"
+          ref={titleRef}
+          className="w-full md:w-full border border-gray-300 p-2 rounded mb-4"
+        />
 
                 <label className="block mb-2">Description:</label>
                 <input
@@ -101,21 +101,21 @@ const ModalInput: React.FC<ModalInputProps> = ({ isOpen, onClose }) => {
                     ))}
                 </select>
 
-                <div className="flex justify-between items-center mb-4">
-                    <button
-                        onClick={handleCancel}
-                        className="bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-600"
-                    >
-                        Cancel
-                    </button>
-                    <button
-                        onClick={handleSubmit}
-                        className="bg-[#4C49ED] text-white py-2 px-4 rounded hover:bg-[#4C49ED]"
-                    >
-                        Submit
-                    </button>
-                </div>
-            </div>
+                <div className="flex flex-col md:flex-row justify-between items-center mb-4">
+          <button
+            onClick={handleCancel}
+            className="w-full md:w-auto bg-gray-500 text-white py-2 px-4 rounded mb-2 md:mb-0 hover:bg-gray-600"
+          >
+            Cancel
+          </button>
+          <button
+            onClick={handleSubmit}
+            className="w-full md:w-auto bg-[#4C49ED] text-white py-2 px-4 rounded hover:bg-[#4C49ED]"
+          >
+            Submit
+          </button>
+        </div>
+      </div>
         )
     );
 };

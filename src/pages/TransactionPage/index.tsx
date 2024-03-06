@@ -103,7 +103,7 @@ const TransactionPage: React.FC = () => {
   useEffect(() => {
     filterAndSearchData();
     filterAndSearchDataType();
-  }, [userData, categoryFilter, searchTerm, currentPage,itemTypeFilter]);
+  }, [userData, categoryFilter, searchTerm, currentPage, itemTypeFilter]);
 
   const filterAndSearchData = () => {
     let filteredTransactions = userData;
@@ -166,6 +166,9 @@ const TransactionPage: React.FC = () => {
         <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-filter backdrop-blur-sm"></div>
       )}
       <h1 className="text-3xl font-bold mb-4">Transactions List</h1>
+
+      <div className='flex flex-row'>
+
       <select
         className="p-2 border rounded-lg mr-2 focus:outline-none focus:ring focus:border-[#4C49ED] hover:border-[#4C49ED]"
         value={categoryFilter || ''}
@@ -194,10 +197,11 @@ const TransactionPage: React.FC = () => {
         <option value="income">Income</option>
         <option value="expense">Expense</option>
       </select>
+      </div>
 
       <input
         type="text"
-        className="p-2 border rounded-lg"
+        className="p-2 border rounded-lg mt-4"
         placeholder="Search by title or description"
         value={searchTerm}
         onChange={(e) => handleSearchTermChange(e.target.value)}
@@ -231,15 +235,9 @@ const TransactionPage: React.FC = () => {
       </div>
 
 
-      <div className="flex justify-center items-center my-4">
-        <button
-          onClick={() => handlePageChange(currentPage - 1)}
-          className={`mx-2 p-2 rounded-lg ${currentPage === 1 ? 'bg-gray-300 cursor-not-allowed' : 'bg-gray-300 hover:bg-[#4C49ED] hover:text-white'}`}
-          disabled={currentPage === 1}
-        >
-          &lt; Prev
-        </button>
-        <div className="flex overflow-ellipsis w-24 mx-auto">
+      <div className="flex flex-wrap justify-center items-center my-4">
+      
+        <div className="flex overflow-ellipsis mx-auto">
           {visiblePages.map((page, index) => (
             <button
               key={index}
@@ -253,16 +251,33 @@ const TransactionPage: React.FC = () => {
             <span className="mx-2">...</span>
           )}
         </div>
-        <button
-          onClick={() => handlePageChange(currentPage + 1)}
-          className={`mx-2 p-2 rounded-lg ${currentPage === totalPages ? 'bg-gray-300 cursor-not-allowed' : 'bg-gray-300 hover:bg-[#4C49ED] hover:text-white'}`}
-          disabled={currentPage === totalPages}
-        >
-          Next &gt;
-        </button>
+        
       </div>
+      
+      <div className='flex flex-col justify-center items-center my-4'>
+
+      <div className="flex flex-row justify-center mt-8 mb-4">
 
 
+      <div className="flex items-center">
+          <button
+            onClick={() => handlePageChange(currentPage - 1)}
+            className={`mx-2 p-2 rounded-lg ${currentPage === 1 ? 'bg-gray-300 cursor-not-allowed' : 'bg-gray-300 hover:bg-[#4C49ED] hover:text-white'}`}
+            disabled={currentPage === 1}
+          >
+            &lt; Prev
+          </button>
+        </div>
+        <div className="flex items-center">
+          <button
+            onClick={() => handlePageChange(currentPage + 1)}
+            className={`mx-2 p-2 rounded-lg ${currentPage === totalPages ? 'bg-gray-300 cursor-not-allowed' : 'bg-gray-300 hover:bg-[#4C49ED] hover:text-white'}`}
+            disabled={currentPage === totalPages}
+          >
+            Next &gt;
+          </button>
+        </div>
+      </div>
       <button
         onClick={handleCreateNewTransaction}
         className="bg-[#4C49ED] hover:bg-[#A1A0BD] hover:text-[#4C49ED] m-2 text-white p-2 rounded "
@@ -272,6 +287,11 @@ const TransactionPage: React.FC = () => {
       {showModal && (
         <ModalInput isOpen={showModal} onClose={handleCloseModal} />
       )}
+        </div>
+
+
+
+
 
     </div>
   );
