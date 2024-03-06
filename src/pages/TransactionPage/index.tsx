@@ -110,15 +110,25 @@ const TransactionPage: React.FC = () => {
 
     // Apply category filter if selected
     if (categoryFilter !== null) {
-      filteredTransactions = filteredTransactions.filter(transaction => transaction.category === categoryFilter);
+      filteredTransactions = filteredTransactions.filter(
+        (transaction) => transaction.category === categoryFilter
+      );
+    }
+
+    // Apply itemType filter if selected
+    if (itemTypeFilter !== null) {
+      filteredTransactions = filteredTransactions.filter(
+        (transaction) => transaction.itemType === itemTypeFilter
+      );
     }
 
     // Apply search filter if search term exists
     if (searchTerm !== '') {
       const lowerCaseSearchTerm = searchTerm.toLowerCase();
-      filteredTransactions = filteredTransactions.filter(transaction =>
-        transaction.title.toLowerCase().includes(lowerCaseSearchTerm) ||
-        transaction.description.toLowerCase().includes(lowerCaseSearchTerm)
+      filteredTransactions = filteredTransactions.filter(
+        (transaction) =>
+          transaction.title.toLowerCase().includes(lowerCaseSearchTerm) ||
+          transaction.description.toLowerCase().includes(lowerCaseSearchTerm)
       );
     }
 
@@ -128,17 +138,27 @@ const TransactionPage: React.FC = () => {
   const filterAndSearchDataType = () => {
     let filteredTransactions = userData;
 
-    // Apply category filter if selected
+    // Apply itemType filter if selected
     if (itemTypeFilter !== null) {
-      filteredTransactions = filteredTransactions.filter(transaction => transaction.itemType === itemTypeFilter);
+      filteredTransactions = filteredTransactions.filter(
+        (transaction) => transaction.itemType === itemTypeFilter
+      );
+    }
+
+    // Apply category filter if selected
+    if (categoryFilter !== null) {
+      filteredTransactions = filteredTransactions.filter(
+        (transaction) => transaction.category === categoryFilter
+      );
     }
 
     // Apply search filter if search term exists
     if (searchTerm !== '') {
       const lowerCaseSearchTerm = searchTerm.toLowerCase();
-      filteredTransactions = filteredTransactions.filter(transaction =>
-        transaction.title.toLowerCase().includes(lowerCaseSearchTerm) ||
-        transaction.description.toLowerCase().includes(lowerCaseSearchTerm)
+      filteredTransactions = filteredTransactions.filter(
+        (transaction) =>
+          transaction.title.toLowerCase().includes(lowerCaseSearchTerm) ||
+          transaction.description.toLowerCase().includes(lowerCaseSearchTerm)
       );
     }
 
@@ -159,15 +179,15 @@ const TransactionPage: React.FC = () => {
     setCurrentPage(1);
   };
 
-  console.log(filteredData.toReversed())
+
   return (
-    <div className="container mx-auto p-12">
+    <div className="p-8 md:p-16 text-left mt-6 mx-auto container">
       {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-filter backdrop-blur-sm"></div>
       )}
       <h1 className="text-2xl sm:text-3xl font-bold mb-2 sm:mb-4">Transactions List</h1>
 
-      <div className='flex flex-row items-center'>
+      <div className='flex flex-row '>
         <select
           className="p-2 sm:w-1/4 lg:w-1/6 border rounded-lg mr-2 focus:outline-none focus:ring focus:border-[#4C49ED] hover:border-[#4C49ED]"
           value={categoryFilter || ''}
@@ -206,35 +226,36 @@ const TransactionPage: React.FC = () => {
         onChange={(e) => handleSearchTermChange(e.target.value)}
       />
 
-      <div className="overflow-x-auto mt-4">
-        <table className="min-w-full bg-white border border-gray-300 shadow-md rounded-md">
-          <thead className="bg-gray-100">
-            <tr>
-              <th className="py-2 px-4 border">Title</th>
-              <th className="py-2 px-4 border">Description</th>
-              <th className="py-2 px-4 border">Amount</th>
-              <th className="py-2 px-4 border">ItemType</th>
-              <th className="py-2 px-4 border">Category</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredData.toReversed().slice(indexOfFirstTransaction, indexOfLastTransaction).map((transaction) => (
-              <tr key={transaction.id} className="transition-all hover:bg-gray-50">
-                <td className="py-2 px-4 border">{transaction.title}</td>
-                <td className="py-2 px-4 border">{transaction.description}</td>
-                <td className={`py-2 px-4 text-center border`}>
-                  {transaction.amount}
-                </td>
-                <td className="py-2 px-4 border">{transaction.itemType}</td>
-                <td className="py-2 px-4 border">{getCategoryString(transaction.category)}</td>
+      <div className="max-w-full mt-4 overflow-x-auto">
+        <div className="max-w-full">
+          <table className="w-full whitespace-nowrap">
+            <thead className="bg-gray-100">
+              <tr>
+                <th className="py-2 px-4 border">Title</th>
+                <th className="py-2 px-4 border">Description</th>
+                <th className="py-2 px-4 border">Amount</th>
+                <th className="py-2 px-4 border">ItemType</th>
+                <th className="py-2 px-4 border">Category</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {filteredData.toReversed().slice(indexOfFirstTransaction, indexOfLastTransaction).map((transaction) => (
+                <tr key={transaction.id} className="transition-all hover:bg-gray-50">
+                  <td className="py-2 px-4 border">{transaction.title}</td>
+                  <td className="py-2 px-4 border">{transaction.description}</td>
+                  <td className={`py-2 px-4 text-center border`}>
+                    {transaction.amount}
+                  </td>
+                  <td className="py-2 px-4 border">{transaction.itemType}</td>
+                  <td className="py-2 px-4 border">{getCategoryString(transaction.category)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
 
-
-      <div className="flex flex-wrap justify-center items-center mt-2">
+      <div className="flex flex-wrap justify-center items-center my-4">
 
         <div className="flex overflow-ellipsis mx-auto">
           {visiblePages.map((page, index) => (

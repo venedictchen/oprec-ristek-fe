@@ -61,15 +61,16 @@ export default function Home() {
   return (
     isAuthenticated && (
       <main className={`flex min-h-screen flex-col justify-between bg-[#F5F5F5] ${poppins.className}`}>
+        
         <div className="flex flex-col bg-[#A1A0BD]">
-          <div className="flex items-center justify-between p-4 bg-[#4C49ED] shadow-md">
-            <div className="flex items-center space-x-2 text-[#FFFFFF]">
-              <GiHamburgerMenu className="text-[#FFFFFF] xl:hidden mr-2" onClick={toggleSidebar} />
+          <div className="flex  justify-between p-4 bg-[#4C49ED] shadow-md">
+            <div className="flex items-center sm:space-x-2 text-[#FFFFFF]">
+              <GiHamburgerMenu className="text-[#FFFFFF] xl:hidden mr-4" onClick={toggleSidebar} />
               <SiMoneygram className="text-3xl" />
-              <h1 className="text-xl font-bold text-[#FFFFFF]">CuanTracker</h1>
+              <h1 className="text-md sm:text-xl font-bold text-[#FFFFFF]">CuanTracker</h1>
             </div>
-            <div className="flex items-center space-x-4">
-              <span className="text-sm text-white">Welcome, {user.username}</span>
+            <div className="flex items-center text-center space-x-">
+              <span className="text-xs sm:text-xl text-white">Welcome, {user.username}</span>
             </div>
           </div>
         </div>
@@ -82,7 +83,7 @@ export default function Home() {
           }}
         >
           {showSidebar && <SideBar selectedOption={selectedOption} onSidebarClick={handleSidebarClick} />}
-          <div className="flex flex-1">
+          <div className="flex flex-1 overflow-x-auto xl:justify-center items-center">
             {selectedOption === "dashboard" && <HomePage />}
             {selectedOption === "transactions" && <TransactionPage />}
           </div>

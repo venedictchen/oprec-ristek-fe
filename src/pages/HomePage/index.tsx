@@ -69,8 +69,8 @@ const HomePage: React.FC = (props) => {
     }, [userData]);
 
     return (
-        <div className="container mx-auto p-14 text-center md:text-left">
-            <div className="flex flex-col gap-1  md:space-x-6">
+        <div className="container mx-auto p-8 md:p-16 text-left ">
+            <div className="flex flex-col gap-1  md:space-x-6 overflow-hidden">
             <h1 className="text-2xl sm:text-3xl font-bold mb-2 sm:mb-4">Dashboard</h1>
                 <div className="flex flex-col xl:flex-row flex-grow gap-16">
                     <div className="mt-8 md:mt-10">
@@ -80,9 +80,9 @@ const HomePage: React.FC = (props) => {
                         lastTransactionAmount={userData?.last_transaction_amount}
                     />
                     </div>
-                     <div className="flex flex-col w-full">
+                     <div className="flex flex-col w-11/12 md:w-full">
                     <h1 className="text-2xl font-bold mb-4">Monthly Overview</h1>
-                    <div className="flex flex-row gap-6 md:gap-24 flex-wrap">
+                    <div className="flex flex-row mt-4 gap-6 md:gap-24 flex-wrap">
                         <canvas id="myChart" ref={chartRef} height={300} width={500}></canvas>
                     </div>
                     </div>

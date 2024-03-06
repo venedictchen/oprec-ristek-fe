@@ -15,11 +15,10 @@ export const SideBar: React.FC<SideBarProps> = ({ selectedOption, onSidebarClick
   const sidebarOptions = [
     { icon: <MdSpaceDashboard className="w-8 h-8" />, label: "Dashboard", option: "dashboard" },
     { icon: <GrTransaction className="w-8 h-8" />, label: "Transaction", option: "transactions" },
-    // { icon: <GiAchievement className="w-8 h-8" />, label: "Goals", option: "goals" },
   ];
 
   return (
-    <nav className="sidebar-container flex flex-col w-64 justify-between p-4 py-16 bg-white border-r border-gray-200 cursor-pointer font-semibold transition-all">
+    <nav className="flex flex-col min-h-screen w-64  p-4 py-16 bg-white border-r border-gray-200 cursor-pointer font-semibold sticky z-10 xl:relative">
 
       <div className="flex flex-col items-center py-24 text-[#A1A0BD] gap-24 text-center justify-center">
         {sidebarOptions.map((option) => (
@@ -35,7 +34,7 @@ export const SideBar: React.FC<SideBarProps> = ({ selectedOption, onSidebarClick
         ))}
       </div>
       <div
-        className="flex px-10 py-2 mt-24 text-[#A1A0BD] hover:text-[#FFFFFF] hover:bg-[#E60000] rounded-md font-semibold"
+        className="flex px-10 py-2 mt-14 text-[#A1A0BD] hover:text-[#FFFFFF] hover:bg-[#E60000] rounded-md font-semibold"
         onClick={handleLogout}
       >
         <BiLogOut className="w-8 h-8" />

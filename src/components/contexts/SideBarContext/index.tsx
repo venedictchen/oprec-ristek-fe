@@ -1,10 +1,5 @@
 import { createContext, useContext, useState } from 'react';
-import { SideBarProviderProps } from './interface';
-
-interface SidebarContextProps {
-  selectedOption: string;
-  setOption: (option: string) => void;
-}
+import { SideBarProviderProps,SidebarContextProps } from './interface';
 
 const SidebarContext = createContext({
     selectedOption: '',
