@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import BalanceCard from './modules/modules-elements/BalanceCard';
 import IncomeCard from './modules/modules-elements/IncomeCard';
-import axios from 'axios';
 import ExpenseCard from './modules/modules-elements/ExpenseCard';
+import axios from 'axios';
 import { useAuth } from '@/components/contexts';
 import { UserProps } from './modules/interface';
 import { Chart, LineController, BarController, BarElement, LinearScale, CategoryScale, PointElement, LineElement } from 'chart.js';
@@ -46,14 +46,13 @@ const HomePage: React.FC = (props) => {
             if (ctx) {
                 const existingChart = Chart.getChart(ctx);
                 if (existingChart) {
-                    existingChart.destroy(); // Destroy the existing Chart instance
+                    existingChart.destroy();
                 }
                 const incomeData = userData.income || [];
                 const expenseData = userData.expenses || [];
 
-
                 new Chart(ctx, {
-                    type: 'bar',  // Use 'bar' type for a bar chart
+                    type: 'bar',
                     data: {
                         labels: ['Income', 'Expense'],
                         datasets: [
@@ -65,33 +64,31 @@ const HomePage: React.FC = (props) => {
                         ],
                     },
                 });
-
             }
         }
     }, [userData]);
 
-
     return (
-        <div className="flex w-full py-12 px-12">
-            <div className="flex flex-col">
-                <div className="flex flex-row gap-24 mb-24 h-[250px]">
-                    <div className="mt-16">
+        <div className="container mx-auto p-14 text-center md:text-left">
+            <div className="flex flex-col gap-1  md:space-x-6">
+            <h1 className="text-2xl sm:text-3xl font-bold mb-2 sm:mb-4">Dashboard</h1>
+                <div className="flex flex-col xl:flex-row flex-grow gap-16">
+                    <div className="mt-8 md:mt-10">
                     <BalanceCard
                         totalBalance={userData?.balance}
                         lastTransactionType={userData?.last_transaction_type}
                         lastTransactionAmount={userData?.last_transaction_amount}
                     />
-
                     </div>
-                    <div className="flex flex-col w-full">
-                        <h1 className="text-2xl font-bold mb-4">Monthly Overview</h1>
-                        <div className="flex flex-row w-full">
-                            <canvas id="myChart" ref={chartRef} width={600} height={300}></canvas>
-                        </div>
-
+                     <div className="flex flex-col w-full">
+                    <h1 className="text-2xl font-bold mb-4">Monthly Overview</h1>
+                    <div className="flex flex-row gap-6 md:gap-24 flex-wrap">
+                        <canvas id="myChart" ref={chartRef} height={300} width={500}></canvas>
+                    </div>
                     </div>
                 </div>
-                <div className="flex flex-row gap-24 mt-14">
+
+                <div className="flex flex-col md:flex-row mt-8 md:mt-0 gap-8">
                     <IncomeCard income={userData?.income} />
                     <ExpenseCard expense={userData?.expenses} />
                 </div>

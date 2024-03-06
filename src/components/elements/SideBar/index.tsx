@@ -19,7 +19,7 @@ export const SideBar: React.FC<SideBarProps> = ({ selectedOption, onSidebarClick
   ];
 
   return (
-    <nav className="flex flex-col w-64 justify-between p-4 py-16 bg-white border-r border-gray-200 cursor-pointer font-semibold">
+    <nav className="sidebar-container flex flex-col w-64 justify-between p-4 py-16 bg-white border-r border-gray-200 cursor-pointer font-semibold transition-all">
 
       <div className="flex flex-col items-center py-24 text-[#A1A0BD] gap-24 text-center justify-center">
         {sidebarOptions.map((option) => (

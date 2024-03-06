@@ -161,53 +161,52 @@ const TransactionPage: React.FC = () => {
 
   console.log(filteredData.toReversed())
   return (
-    <div className="container mx-auto p-8">
+    <div className="container mx-auto p-12">
       {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-filter backdrop-blur-sm"></div>
       )}
-      <h1 className="text-3xl font-bold mb-4">Transactions List</h1>
+      <h1 className="text-2xl sm:text-3xl font-bold mb-2 sm:mb-4">Transactions List</h1>
 
-      <div className='flex flex-row'>
+      <div className='flex flex-row items-center'>
+        <select
+          className="p-2 sm:w-1/4 lg:w-1/6 border rounded-lg mr-2 focus:outline-none focus:ring focus:border-[#4C49ED] hover:border-[#4C49ED]"
+          value={categoryFilter || ''}
+          onChange={(e) => handleCategoryFilterChange(e.target.value ? parseInt(e.target.value) : null)}
+        >
+          <option value="">All Categories</option>
+          <option value="1">Food</option>
+          <option value="2">Transportation</option>
+          <option value="3">Living</option>
+          <option value="4">Communications</option>
+          <option value="5">Clothes</option>
+          <option value="6">Health</option>
+          <option value="7">Toiletry</option>
+          <option value="8">Gifts</option>
+          <option value="9">Entertainments</option>
+          <option value="10">Other</option>
 
-      <select
-        className="p-2 border rounded-lg mr-2 focus:outline-none focus:ring focus:border-[#4C49ED] hover:border-[#4C49ED]"
-        value={categoryFilter || ''}
-        onChange={(e) => handleCategoryFilterChange(e.target.value ? parseInt(e.target.value) : null)}
-      >
-        <option value="">All Categories</option>
-        <option value="1">Food</option>
-        <option value="2">Transportation</option>
-        <option value="3">Living</option>
-        <option value="4">Communications</option>
-        <option value="5">Clothes</option>
-        <option value="6">Health</option>
-        <option value="7">Toiletry</option>
-        <option value="8">Gifts</option>
-        <option value="9">Entertainments</option>
-        <option value="10">Other</option>
 
-
-      </select>
-      <select
-        className="p-2 border rounded-lg mr-2 focus:outline-none focus:ring focus:border-[#4C49ED] hover:border-[#4C49ED]"
-        value={itemTypeFilter || ''}
-        onChange={(e) => handleTransactionTypeFilterChange(e.target.value ? e.target.value : null)}
-      >
-        <option value="">All ItemType</option>
-        <option value="income">Income</option>
-        <option value="expense">Expense</option>
-      </select>
+        </select>
+        <select
+          className="p-2 sm:w-1/4 lg:w-1/6 border rounded-lg mr-2 focus:outline-none focus:ring focus:border-[#4C49ED] hover:border-[#4C49ED]"
+          value={itemTypeFilter || ''}
+          onChange={(e) => handleTransactionTypeFilterChange(e.target.value ? e.target.value : null)}
+        >
+          <option value="">All ItemType</option>
+          <option value="income">Income</option>
+          <option value="expense">Expense</option>
+        </select>
       </div>
 
       <input
         type="text"
-        className="p-2 border rounded-lg mt-4"
+        className="p-2 sm:w-1/2 lg:w-1/4 border rounded-lg mt-2"
         placeholder="Search by title or description"
         value={searchTerm}
         onChange={(e) => handleSearchTermChange(e.target.value)}
       />
 
-      <div className="overflow-x-auto mt-8">
+      <div className="overflow-x-auto mt-4">
         <table className="min-w-full bg-white border border-gray-300 shadow-md rounded-md">
           <thead className="bg-gray-100">
             <tr>
@@ -235,8 +234,8 @@ const TransactionPage: React.FC = () => {
       </div>
 
 
-      <div className="flex flex-wrap justify-center items-center my-4">
-      
+      <div className="flex flex-wrap justify-center items-center mt-2">
+
         <div className="flex overflow-ellipsis mx-auto">
           {visiblePages.map((page, index) => (
             <button
@@ -251,44 +250,45 @@ const TransactionPage: React.FC = () => {
             <span className="mx-2">...</span>
           )}
         </div>
-        
+
       </div>
-      
+
       <div className='flex flex-col justify-center items-center my-4'>
 
-      <div className="flex flex-row justify-center mt-8 mb-4">
+        <div className="flex flex-row justify-center mt-8 mb-4">
 
 
-      <div className="flex items-center">
-          <button
-            onClick={() => handlePageChange(currentPage - 1)}
-            className={`mx-2 p-2 rounded-lg ${currentPage === 1 ? 'bg-gray-300 cursor-not-allowed' : 'bg-gray-300 hover:bg-[#4C49ED] hover:text-white'}`}
-            disabled={currentPage === 1}
-          >
-            &lt; Prev
-          </button>
+          <div className="flex items-center">
+            <button
+              onClick={() => handlePageChange(currentPage - 1)}
+              className={`mx-2 p-2 rounded-lg ${currentPage === 1 ? 'bg-gray-300 cursor-not-allowed' : 'bg-gray-300 hover:bg-[#4C49ED] hover:text-white'}`}
+              disabled={currentPage === 1}
+            >
+              &lt; Prev
+            </button>
+          </div>
+          <div className="flex items-center">
+            <button
+              onClick={() => handlePageChange(currentPage + 1)}
+              className={`mx-2 p-2 rounded-lg ${currentPage === totalPages ? 'bg-gray-300 cursor-not-allowed' : 'bg-gray-300 hover:bg-[#4C49ED] hover:text-white'}`}
+              disabled={currentPage === totalPages}
+            >
+              Next &gt;
+            </button>
+          </div>
         </div>
-        <div className="flex items-center">
+        <div className='flex flex-col sm:flex-row justify-center items-center mt-2'>
           <button
-            onClick={() => handlePageChange(currentPage + 1)}
-            className={`mx-2 p-2 rounded-lg ${currentPage === totalPages ? 'bg-gray-300 cursor-not-allowed' : 'bg-gray-300 hover:bg-[#4C49ED] hover:text-white'}`}
-            disabled={currentPage === totalPages}
+            onClick={handleCreateNewTransaction}
+            className="bg-[#4C49ED] hover:bg-[#A1A0BD] hover:text-[#4C49ED] m-2 text-white p-2 rounded "
           >
-            Next &gt;
+            Create New Transaction
           </button>
+          {showModal && (
+            <ModalInput isOpen={showModal} onClose={handleCloseModal} />
+          )}
         </div>
       </div>
-      <button
-        onClick={handleCreateNewTransaction}
-        className="bg-[#4C49ED] hover:bg-[#A1A0BD] hover:text-[#4C49ED] m-2 text-white p-2 rounded "
-      >
-        Create New Transaction
-      </button>
-      {showModal && (
-        <ModalInput isOpen={showModal} onClose={handleCloseModal} />
-      )}
-        </div>
-
 
 
 
